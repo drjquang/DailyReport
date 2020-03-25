@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- first load django static tag. -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    <title>Daily Report</title>
+</head>
+<body>
+    <h1>Latest accidents</h1>
+    <table>
+        <tr>
+            <th>No</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>MC</th>
+            <th>Problem</th>
+            <th>Solution</th>
+            <th>Tech</th>
+            <th>Sup</th>
+        </tr>
+        {% for record in records %}
+        <tr>
+            <td>{{ record.id }}</td>
+            <td>{{ record.datestamp|date:'d-m-Y' }}</td>
+            <td>{{ record.timestamp|date:'H:i'}}</td>
+            <td>{{ record.machine_no }}</td>
+            <td>{{ record.problem|linebreaks }}</td>
+            <td>{{ record.solution }}</td>
+            <td>{{ record.done_by }}</td>
+            <td>{{ record.supervised_by }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
